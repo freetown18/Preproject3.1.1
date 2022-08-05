@@ -37,13 +37,13 @@ public class UserController {
         if (result.hasErrors()) {
             return "users/user-info";
         }
-        userService.addUser(user);
+        userService.saveNew(user);
         return "redirect:/users";
     }
 
     @GetMapping("/{id}/edit")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "users/update-user";
     }
 
@@ -53,7 +53,7 @@ public class UserController {
             user.setId(id);
             return "users/update-user";
         }
-        userService.updateUser(id, user);
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
